@@ -1,4 +1,4 @@
-package test2.ex7;
+package test2.ex1;
 
 public class Student {
 
@@ -14,15 +14,9 @@ public class Student {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
+
 }
