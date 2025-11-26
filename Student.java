@@ -1,4 +1,4 @@
-package test2.ex1;
+package test5.ex1.ex4;
 
 public class Student {
 

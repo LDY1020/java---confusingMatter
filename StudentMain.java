@@ -1,48 +1,60 @@
-package test2.ex1;
+package test5.ex1.ex4;
+
+import java.util.Scanner;
 
 public class StudentMain {
 
     public static void main(String[] args) {
-        Student[] students = {new Student("도윤" , 90) , new Student("철수" , 70) , new Student("유리" , 80)};
+        Student[] students = new Student[5];
+        Scanner sc = new Scanner(System.in);
 
-        StudentMain sm = new StudentMain();
+        for (int i = 0; i < students.length; i++) {
+            System.out.println("이름을 입력하세요 : ");
+            String name = sc.nextLine();
 
-        int max = sm.findMax(students);
-        String top = sm.findTopName(students);
-        double avg =  sm.findAvg(students);
+            System.out.println("점수를 입력하세요 : ");
+            int score = sc.nextInt();
+            sc.nextLine(); // << 여기서 엔터 버퍼 비워주기
 
-    }
-
-    public int findMax(Student[] students){
-        int max = students[0].getScore();
-        for (int i = 1; i < students.length; i++){
-            if (students[i].getScore() > max){
-                max = students[i].getScore();
-            }
+            students[i] = new Student(name, score);
         }
-        System.out.println("최고 점수 : " + max);
-        return max;
-    }
-    public String findTopName(Student[] students){
-        String topName = students[0].getName();
-        int max = students[0].getScore();
-        for (int i = 0; i < students.length; i++){
-            if(students[i].getScore() > max){
-                topName = students[i].getName();
-                max = students[i].getScore();
-            }
-        }
-        System.out.println("1등 학생 : " + topName);
-        return topName;
+
+        int total = sum(students);
+        double avg = average(students);
+        int maxIdx = maxIndex(students);
+        Student top = students[maxIdx];
+
+
+        System.out.println("점수의 총합 : " + total);
+        System.out.println("평균 점수 : " + avg);
+        System.out.println("최고 점수 학생 : " + top.getName() + " (" + top.getScore() + "점)");
+
     }
 
-    public double findAvg(Student[] students){
+    public static int sum(Student[] scores){
         int sum = 0;
-        for (int i = 0; i < students.length; i++){
-            sum += students[i].getScore();
+        for(int i = 0; i < scores.length; i++){
+            sum += scores[i].getScore();
         }
-        double avg = (double) sum / students.length;
-        System.out.printf("평균 점수 : %.2f\n" , avg);
-        return avg;
+        return sum;
+    }
+
+    public static double average(Student[] scores){
+        int sum = 0;
+        for(int i = 0; i < scores.length; i++){
+            sum += scores[i].getScore();
+        }
+        return (double) sum /scores.length;
+    }
+
+
+    public static int maxIndex(Student[] scores){
+        int maxIndex = 0;
+        for(int i = 0; i < scores.length; i++){
+        if(scores[i].getScore() > scores[maxIndex].getScore()){
+                maxIndex = i;
+            }
+        }
+        return maxIndex;
     }
 }
